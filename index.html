@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusCare - Student Care Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-placeholder">
+                    <img src="campus_care_logo.png" alt="CampusCare Logo">
+                </div>
+                <div class="brand-info">
+                    <h1 class="brand-name">CampusCare</h1>
+                    <p class="slogan">Your voice, our priority</p>
+                </div>
+            </div>
+            <div class="profile-section" id="profileSection" style="display: none;">
+                <button class="profile-btn" id="profileBtn">
+                    <span id="profileInitial">U</span>
+                </button>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href="#" id="profileLink">Profile</a>
+                    <a href="#" id="updateDetailsLink">Update Details</a>
+                    <a href="#" id="logoutLink">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Login Page -->
+        <div class="page" id="loginPage">
+            <div class="login-container">
+                <div class="login-form">
+                    <h2>Login to CampusCare</h2>
+                    
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" required placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" required placeholder="Enter your password">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="roleSelect">Role</label>
+                            <select id="roleSelect" required>
+                                <option value="">Select Role</option>
+                                <option value="student">Student</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" id="adminCodeGroup" style="display: none;">
+                            <label for="adminCode">Admin Code</label>
+                            <input type="password" id="adminCode" placeholder="Enter admin code">
+                        </div>
+                        
+                        <div class="error-message" id="loginError"></div>
+                        
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        
+                        <div class="secondary-actions">
+                            <button type="button" class="btn btn-secondary" id="signUpBtn">Sign Up</button>
+                            <button type="button" class="btn btn-secondary" id="forgotPasswordBtn">Forgot Password</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="terms-section">
+                    <h3>Terms & Conditions</h3>
+                    
+                        ⚡No abusive language or inappropriate behavior<br>
+                        ⚡Maintain proper student-teacher communication <br>
+                        ⚡Your privacy is assured and data is protected <br>
+                        ⚡Anonymous connection with management available<br>
+                        ⚡Respect fellow students and staff members<br>
+                        ⚡Use the platform responsibly for genuine concerns<br>
+                    
+                    
+                    <div class="admin-points" id="adminPointsDisplay" style="display: none;">
+                        <p>Admin Lifetime Points: <span id="adminPoints">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sign Up Page -->
+        <div class="page" id="signUpPage" style="display: none;">
+            <div class="signup-container">
+                <div class="signup-form">
+                    <h2>Sign Up for CampusCare</h2>
+                    
+                    <form id="signUpForm">
+                        <div class="form-group">
+                            <label for="signupRole">Role *</label>
+                            <select id="signupRole" required>
+                                <option value="">Select Role</option>
+                                <option value="student">Student</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signupName">Full Name *</label>
+                            <input type="text" id="signupName" required placeholder="Enter your full name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signupEmail">Email *</label>
+                            <input type="email" id="signupEmail" required placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="form-group" id="erpGroup" style="display: none;">
+                            <label for="signupErp">ERP Number *</label>
+                            <input type="text" id="signupErp" placeholder="Enter your ERP number">
+                        </div>
+                        
+                        <div class="form-group" id="courseGroup" style="display: none;">
+                            <label for="signupCourse">Course/Branch *</label>
+                            <input type="text" id="signupCourse" placeholder="e.g., Computer Science Engineering">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signupPassword">Password *</label>
+                            <input type="password" id="signupPassword" required placeholder="Enter password (min 6 characters)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password *</label>
+                            <input type="password" id="confirmPassword" required placeholder="Re-enter your password">
+                        </div>
+                        
+                        <div class="form-group" id="signupAdminCodeGroup" style="display: none;">
+                            <label for="signupAdminCode">Admin Code *</label>
+                            <input type="password" id="signupAdminCode" placeholder="Enter valid admin code">
+                        </div>
+                        
+                        <div class="error-message" id="signupError"></div>
+                        <div class="success-message" id="signupSuccess"></div>
+                        
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                        <button type="button" class="btn btn-secondary" id="backToLoginBtn">Back to Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forgot Password Page -->
+        <div class="page" id="forgotPasswordPage" style="display: none;">
+            <div class="forgot-password-container">
+                <div class="forgot-password-form">
+                    <h2>Reset Password</h2>
+                    
+                    <form id="forgotPasswordForm">
+                        <div class="form-group">
+                            <label for="resetEmail">Email</label>
+                            <input type="email" id="resetEmail" required placeholder="Enter your registered email">
+                        </div>
+                        
+                        <div class="success-message" id="resetSuccess"></div>
+                        
+                        <button type="submit" class="btn btn-primary">Send Reset Link</button>
+                        <button type="button" class="btn btn-secondary" id="backToLoginFromResetBtn">Back to Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div class="page" id="dashboardPage" style="display:  none;">
+            <div class="dashboard-container">
+                <div class="welcome-section">
+                    <h2 id="welcomeMessage">Welcome, User</h2>
+                    <p id="roleMessage">Your role: Student</p>
+                </div>
+                
+                <!-- Student Dashboard -->
+                <div class="student-dashboard" id="studentDashboard" style="display: none;">
+                    <div class="action-buttons">
+                        <button class="btn btn-primary btn-large" id="complaintBtn">
+                            <span>📝</span>
+                            Submit Complaint
+                        </button>
+                        <button class="btn btn-secondary btn-large" id="suggestionBtn">
+                            <span>💡</span>
+                            Submit Suggestion
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Admin Dashboard -->
+                <div class="admin-dashboard" id="adminDashboard" style="display: none;">
+                    <div class="admin-controls">
+                        <h3>Submissions Management</h3>
+                        <div class="filter-section">
+                            <label for="adminFilter">Filter:  </label>
+                            <select id="adminFilter">
+                                <option value="all">All</option>
+                                <option value="urgent">Urgent</option>
+                                <option value="new">New</option>
+                                <option value="normal">Normal</option>
+                            </select>
+                        </div>
+                        <div class="submissions-list" id="submissionsList">
+                            <!-- Submissions will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submission Type Page -->
+        <div class="page" id="submissionTypePage" style="display: none;">
+            <div class="submission-container">
+                <h2>Select Category</h2>
+                
+                <div class="category-grid">
+                    <button class="category-btn" data-category="mess">🍽️ Mess</button>
+                    <button class="category-btn" data-category="hostel">🏠 Hostel</button>
+                    <button class="category-btn" data-category="laundry">👕 Laundry</button>
+                    <button class="category-btn" data-category="academics">📚 Academics</button>
+                    <button class="category-btn" data-category="harassment">⚠️ Harassment</button>
+                    <button class="category-btn" data-category="other">📋 Other</button>
+                </div>
+                
+                <button class="btn btn-secondary" id="backToDashboardBtn">Back to Dashboard</button>
+                
+                <!-- History Section -->
+                <div class="history-section">
+                    <h3>Your Submission History</h3>
+                    
+                    <!-- Notifications -->
+                    <div class="notifications" id="notificationsList">
+                        <!-- Notifications will appear here -->
+                    </div>
+                    
+                    <div class="filter-section">
+                        <label for="historyFilter">Filter: </label>
+                        <select id="historyFilter">
+                            <option value="all">All</option>
+                            <option value="urgent">Urgent</option>
+                            <option value="normal">Normal</option>
+                        </select>
+                    </div>
+                    
+                    <div class="history-list" id="historyList">
+                        <!-- History items will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Terms & Conditions -->
+                <div class="terms-section">
+                    <h3>Terms & Conditions</h3>
+                    <ul>
+                        <li>No abusive language or inappropriate behavior</li>
+                        <li>Maintain proper student-teacher communication</li>
+                        <li>Your privacy is assured and data is protected</li>
+                        <li>Anonymous connection with management available</li>
+                        <li>Respect fellow students and staff members</li>
+                        <li>Use the platform responsibly for genuine concerns</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submission Form Page -->
+        <div class="page" id="submissionFormPage" style="display: none;">
+            <div class="form-container">
+                <h2 id="submissionFormTitle">Submit Complaint</h2>
+                
+                <form id="submissionForm">
+                    <div class="form-group">
+                        <label for="submissionDescription" id="descriptionLabel">Describe your issue</label>
+                        <textarea id="submissionDescription" rows="6" required placeholder="Please provide detailed information... "></textarea>
+                    </div>
+                    
+                    <div class="form-group" id="urgentGroup">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="urgentCheckbox">
+                            <span class="checkmark"></span>
+                            Mark as Urgent
+                        </label>
+                    </div>
+                    
+                    <div class="form-group" id="fileUploadGroup">
+                        <label for="fileUpload">Attach File (optional)</label>
+                        <input type="file" id="fileUpload" accept=".jpg,.jpeg,.png,.pdf,. doc,.docx">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" id="backToTypeSelectionBtn">Back</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Profile/Update Details Page -->
+        <div class="page" id="updateDetailsPage" style="display: none;">
+            <div class="update-container">
+                <h2>Update Details</h2>
+                
+                <form id="updateForm">
+                    <div class="form-group">
+                        <label for="updateName">Full Name *</label>
+                        <input type="text" id="updateName" required placeholder="Enter your full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="updateEmail">Email *</label>
+                        <input type="email" id="updateEmail" required placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group" id="updateErpGroup" style="display: none;">
+                        <label for="updateErp">ERP Number</label>
+                        <input type="text" id="updateErp" placeholder="Enter your ERP number">
+                    </div>
+                    
+                    <div class="form-group" id="updateCourseGroup" style="display: none;">
+                        <label for="updateCourse">Course/Branch</label>
+                        <input type="text" id="updateCourse" placeholder="e.g., Computer Science Engineering">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="updatePassword">New Password (leave blank to keep current)</label>
+                        <input type="password" id="updatePassword" placeholder="Enter new password">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="updateConfirmPassword">Confirm New Password</label>
+                        <input type="password" id="updateConfirmPassword" placeholder="Re-enter new password">
+                    </div>
+                    
+                    <div class="error-message" id="updateError"></div>
+                    <div class="success-message" id="updateSuccess"></div>
+                    
+                    <button type="submit" class="btn btn-primary">Update Details</button>
+                    <button type="button" class="btn btn-secondary" id="backToDashboardFromUpdateBtn">Back to Dashboard</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rating Modal -->
+    <div class="modal" id="ratingModal" style="display: none;">
+        <div class="modal-content">
+            <h3>Rate Admin Response</h3>
+            <p>How would you rate the admin's response to your complaint?</p>
+            
+            <div class="rating-stars">
+                <span class="star" data-rating="1">⭐</span>
+                <span class="star" data-rating="2">⭐</span>
+                <span class="star" data-rating="3">⭐</span>
+                <span class="star" data-rating="4">⭐</span>
+                <span class="star" data-rating="5">⭐</span>
+                <span class="star" data-rating="6">⭐</span>
+                <span class="star" data-rating="7">⭐</span>
+                <span class="star" data-rating="8">⭐</span>
+                <span class="star" data-rating="9">⭐</span>
+                <span class="star" data-rating="10">⭐</span>
+            </div>
+            
+            <div class="rating-number">
+                <span id="selectedRating">0</span>/10
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="submitRating">Submit Rating</button>
+                <button class="btn btn-secondary" id="cancelRating">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div class="modal" id="logoutModal" style="display:  none;">
+        <div class="modal-content">
+            <h3>Confirm Logout</h3>
+            <p>Are you sure you want to logout?</p>
+            
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="confirmLogout">Yes, Logout</button>
+                <button class="btn btn-secondary" id="cancelLogout">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Image Placeholders (can be easily replaced) -->
+    <div class="image-placeholder" style="display: none;">
+        <p>Replace with your images here</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
